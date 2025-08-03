@@ -51,30 +51,16 @@
         "label": "Support",
         "href": "mailto:support@return2play.com"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.return2play.com"
-    }
+    ]
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
      "vscode"
    ]
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/return2play",
-      "github": "https://github.com/return2play",
-      "linkedin": "https://linkedin.com/company/return2play"
+      "github": "https://github.com/return2play"
     }
   }
 }
