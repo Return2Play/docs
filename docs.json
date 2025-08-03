@@ -26,7 +26,8 @@
               "api-reference/endpoints/health",
               "api-reference/endpoints/get-all-players",
               "api-reference/endpoints/get-player-status",
-              "api-reference/endpoints/get-all-player-statuses"
+              "api-reference/endpoints/get-all-player-statuses",
+              "api-reference/endpoints/stats-prediction"
             ]
           },
           {

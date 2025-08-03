@@ -1,0 +1,208 @@
+---
+title: 'Stats Prediction'
+description: 'Predict NFL game outcomes and point differentials based on player participation'
+---
+
+# Stats Prediction
+
+Predict NFL game outcomes and point differentials based on player participation and game conditions.
+
+<RequestExample>
+```bash
+curl -X POST https://api.return2play.com/predict \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -d '{
+    "player_name": "Tom Brady",
+    "made_contribution": true,
+    "home_or_away": "Home",
+    "opposing_team": "ATL",
+    "game_month": 10,
+    "game_week": 40,
+    "game_day_of_week": 6,
+    "include_extended": false
+  }'
+```
+</RequestExample>
+
+<ResponseExample>
+```json
+{
+  "success": true,
+  "player_name": "Tom Brady",
+  "player_id": 11252,
+  "predictions": {
+    "outcome_probabilities": {
+      "Loss": 0.15,
+      "Tie": 0.02,
+      "Win": 0.83
+    },
+    "point_differential": 8.5
+  },
+  "input_parameters": {
+    "made_contribution": true,
+    "home_or_away": "Home",
+    "opposing_team": "ATL",
+    "game_month": 10,
+    "game_week": 40,
+    "game_day_of_week": 6
+  }
+}
+```
+</ResponseExample>
+
+## Request Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `player_name` | string | Yes | Player's full name (e.g., "Tom Brady", "Lamar Jackson") |
+| `opposing_team` | string | Yes | Three-letter team code (e.g., "ATL", "KC", "GB") |
+| `made_contribution` | boolean | No | Whether the player made a contribution (default: true) |
+| `home_or_away` | string | No | Game location - "Home" or "Away" (default: "Home") |
+| `game_month` | integer | No | Month of the game (1-12) |
+| `game_week` | integer | No | Week of the season |
+| `game_day_of_week` | integer | No | Day of week (1=Monday, 7=Sunday) |
+| `include_extended` | boolean | No | Include extended predictions (default: false) |
+
+## Response Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `success` | boolean | Whether the request was successful |
+| `player_name` | string | The player name that was processed |
+| `player_id` | integer | Internal player identifier |
+| `predictions` | object | Prediction results |
+| `predictions.outcome_probabilities` | object | Win/Loss/Tie probabilities |
+| `predictions.point_differential` | float | Expected point differential |
+| `input_parameters` | object | Echo of the input parameters |
+
+## Team Codes
+
+| Code | Team | Code | Team |
+|------|------|------|------|
+| ATL | Atlanta Falcons | KC | Kansas City Chiefs |
+| GB | Green Bay Packers | BUF | Buffalo Bills |
+| NE | New England Patriots | DAL | Dallas Cowboys |
+| SF | San Francisco 49ers | PHI | Philadelphia Eagles |
+| SEA | Seattle Seahawks | BAL | Baltimore Ravens |
+| CHI | Chicago Bears | DET | Detroit Lions |
+| NYG | New York Giants | WAS | Washington Commanders |
+| CAR | Carolina Panthers | TB | Tampa Bay Buccaneers |
+| ARI | Arizona Cardinals | LAR | Los Angeles Rams |
+| MIN | Minnesota Vikings | NO | New Orleans Saints |
+| HOU | Houston Texans | IND | Indianapolis Colts |
+| JAX | Jacksonville Jaguars | TEN | Tennessee Titans |
+| CIN | Cincinnati Bengals | PIT | Pittsburgh Steelers |
+| CLE | Cleveland Browns | NYJ | New York Jets |
+| MIA | Miami Dolphins | LV | Las Vegas Raiders |
+| DEN | Denver Broncos | LAC | Los Angeles Chargers |
+
+## Error Responses
+
+<ResponseExample>
+```json
+{
+  "success": false,
+  "error": "Player not found: John Doe"
+}
+```
+</ResponseExample>
+
+<ResponseExample>
+```json
+{
+  "success": false,
+  "error": "opposing_team is required"
+}
+```
+</ResponseExample>
+
+## Use Cases
+
+- **Fantasy Sports**: Predict game outcomes for fantasy football decisions
+- **Sports Betting**: Analyze player impact on game outcomes
+- **Team Analysis**: Understand how individual players affect team performance
+- **Injury Impact**: Assess how player availability affects game predictions
+
+## Examples
+
+### Basic Prediction
+```bash
+curl -X POST https://api.return2play.com/predict \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -d '{
+    "player_name": "Patrick Mahomes",
+    "opposing_team": "BUF"
+  }'
+```
+
+### Detailed Prediction
+```bash
+curl -X POST https://api.return2play.com/predict \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -d '{
+    "player_name": "Lamar Jackson",
+    "made_contribution": true,
+    "home_or_away": "Away",
+    "opposing_team": "KC",
+    "game_month": 11,
+    "game_week": 45,
+    "game_day_of_week": 6,
+    "include_extended": true
+  }'
+```
+
+### JavaScript Example
+```javascript
+async function predictGameOutcome(playerName, opposingTeam) {
+  const response = await fetch('https://api.return2play.com/predict', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer YOUR_API_KEY'
+    },
+    body: JSON.stringify({
+      player_name: playerName,
+      opposing_team: opposingTeam
+    })
+  });
+  
+  const result = await response.json();
+  
+  if (result.success) {
+    console.log(`Win probability: ${result.predictions.outcome_probabilities.Win}`);
+    console.log(`Point differential: ${result.predictions.point_differential}`);
+  }
+  
+  return result;
+}
+```
+
+### Python Example
+```python
+import requests
+
+def predict_game_outcome(player_name, opposing_team):
+    url = "https://api.return2play.com/predict"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer YOUR_API_KEY"
+    }
+    data = {
+        "player_name": player_name,
+        "opposing_team": opposing_team
+    }
+    
+    response = requests.post(url, json=data, headers=headers)
+    result = response.json()
+    
+    if result.get('success'):
+        win_prob = result['predictions']['outcome_probabilities']['Win']
+        point_diff = result['predictions']['point_differential']
+        print(f"Win probability: {win_prob:.1%}")
+        print(f"Point differential: {point_diff:.1f}")
+    
+    return result
+``` 
