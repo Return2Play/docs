@@ -1,16 +1,13 @@
-# Mintlify Starter Kit
+# Return2Play API Documentation
 
-Use the starter kit to get your docs deployed and ready to customize.
+This repository contains the documentation for the Return2Play API, which provides injury prediction and player status data for sports applications.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## Features
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
-
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+- **Player Status API**: Get real-time injury status and predictions for individual players
+- **All Players API**: Retrieve comprehensive data for all players in our database
+- **Player Statuses API**: Get injury status for multiple players in a single request
+- **Health Check API**: Verify API status and connectivity
 
 ## Development
 
@@ -32,7 +29,21 @@ View your local preview at `http://localhost:3000`.
 
 Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
 
+## API Documentation
+
+The documentation includes:
+
+- **API Reference**: Complete endpoint documentation
+- **Code Examples**: Integration examples for JavaScript, Python, React, and more
+- **Data Models**: Response structure documentation
+- **Use Cases**: Fantasy sports, sports betting, and sports news applications
+
 ## Need help?
+
+### Support
+
+- **Email**: [support@return2play.com](mailto:support@return2play.com)
+- **Documentation**: [https://docs.return2play.com](https://docs.return2play.com)
 
 ### Troubleshooting
 
