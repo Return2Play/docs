@@ -44,7 +44,7 @@
       "anchors": [
         {
           "anchor": "Documentation",
-          "href": "/api-reference/r2p-prediction-api",
+          "href": "https://docs.return2play.com",
           "icon": "book-open-cover"
         },
         {
