@@ -39,26 +39,7 @@
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://docs.return2play.com",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Support",
-          "href": "mailto:support@return2play.com",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://return2play.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",
