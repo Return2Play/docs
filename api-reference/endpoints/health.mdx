@@ -1,0 +1,40 @@
+---
+title: 'Health Check'
+description: 'Check API health and status'
+---
+
+# Health Check
+
+Check the health and status of the R2P Prediction API.
+
+<RequestExample>
+```bash
+curl -X GET https://ifpwy9pbk0.execute-api.us-east-1.amazonaws.com/prod/health
+```
+</RequestExample>
+
+<ResponseExample>
+```json
+{
+  "status": "healthy",
+  "timestamp": "2025-08-03T16:58:44.335Z",
+  "service": "R2P Prediction API (Test)",
+  "version": "1.0.0"
+}
+```
+</ResponseExample>
+
+## Response Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `status` | string | Health status of the API |
+| `timestamp` | string | Current server timestamp in ISO format |
+| `service` | string | Service name and environment |
+| `version` | string | API version number |
+
+## Use Cases
+
+- **Monitoring**: Check if the API is running and responsive
+- **Load Balancers**: Health check endpoint for load balancer configuration
+- **Status Pages**: Display API status on status pages 

@@ -1,0 +1,106 @@
+---
+title: 'Get Player Status'
+description: 'Retrieve injury status for a specific player'
+---
+
+# Get Player Status
+
+Retrieve detailed injury status and information for a specific NFL player by their `sportsdata_id`.
+
+<RequestExample>
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"player_id":"b4af6462-3e3a-49d5-9d96-482ad9f3c0c8"}' \
+  https://ifpwy9pbk0.execute-api.us-east-1.amazonaws.com/prod/player
+```
+</RequestExample>
+
+<ResponseExample>
+```json
+{
+  "success": true,
+  "message": "Player status retrieved successfully",
+  "data": {
+    "player_name": "Kadarius Toney",
+    "status": "Ready for Play",
+    "reported_date": "2024-09-10",
+    "injury": "Ankle",
+    "team": null,
+    "position": "WR",
+    "injury_score": "4"
+  }
+}
+```
+</ResponseExample>
+
+## Request Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `player_id` | string | Yes | The player's sportsdata_id |
+
+## Response Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `success` | boolean | Request success status |
+| `message` | string | Response message |
+| `data` | object | Player status object |
+
+### Player Status Object Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `player_name` | string | Player's full name |
+| `status` | string | Current injury status (e.g., "Ready for Play", "1-2 weeks") |
+| `reported_date` | string | Date injury was reported (YYYY-MM-DD) |
+| `injury` | string | Type of injury |
+| `team` | string | Player's team (may be null) |
+| `position` | string | Player's position |
+| `injury_score` | string | Injury severity score (0-157) |
+
+## Status Values
+
+Common status values include:
+- **"Ready for Play"** - Player is healthy and available
+- **"0-1 week"** - Expected return within a week
+- **"1-2 weeks"** - Expected return in 1-2 weeks
+- **"2-3 weeks"** - Expected return in 2-3 weeks
+- **"3-4 weeks"** - Expected return in 3-4 weeks
+- **"4-6 weeks"** - Expected return in 4-6 weeks
+- **"6-8 weeks"** - Expected return in 6-8 weeks
+- **"Out for this season"** - Season-ending injury
+
+## Error Responses
+
+### Player Not Found
+
+<ResponseExample>
+```json
+{
+  "success": false,
+  "message": "Failed to retrieve player status",
+  "error": "Failed to get player status: Player not found"
+}
+```
+</ResponseExample>
+
+### Missing Player ID
+
+<ResponseExample>
+```json
+{
+  "success": false,
+  "message": "Failed to retrieve player status",
+  "error": "Failed to get player status: Player sportsdata_id is required"
+}
+```
+</ResponseExample>
+
+## Use Cases
+
+- **Fantasy Football**: Check if a specific player is injured
+- **Sports Betting**: Get injury status for betting decisions
+- **Team Management**: Monitor player availability
+- **News Applications**: Display injury status in news feeds 

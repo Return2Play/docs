@@ -1,0 +1,94 @@
+---
+title: 'Get All Players'
+description: 'Retrieve all NFL players with injury data'
+---
+
+# Get All Players
+
+Retrieve a comprehensive list of all NFL players with their injury status, position, and other relevant data.
+
+<RequestExample>
+```bash
+curl -X GET https://ifpwy9pbk0.execute-api.us-east-1.amazonaws.com/prod/players
+```
+</RequestExample>
+
+<ResponseExample>
+```json
+{
+  "success": true,
+  "message": "Players retrieved successfully",
+  "data": [
+    {
+      "player_id": "b4af6462-3e3a-49d5-9d96-482ad9f3c0c8",
+      "player_name": "Kadarius Toney",
+      "team": null,
+      "position": "WR",
+      "sportsdata_id": "b4af6462-3e3a-49d5-9d96-482ad9f3c0c8",
+      "injury": "Ankle",
+      "injury_summary": "Ankle",
+      "est_return": "Ready for Play",
+      "player_injury_score": "4",
+      "reported_date": "2024-09-10",
+      "snapshot_date": "2024-09-10",
+      "created_at": null
+    },
+    {
+      "player_id": "7e91086f-9ca4-4bd9-a099-b88b2f37e6c6",
+      "player_name": "C.J. Stroud",
+      "team": null,
+      "position": "QB",
+      "sportsdata_id": "7e91086f-9ca4-4bd9-a099-b88b2f37e6c6",
+      "injury": "Undisclosed",
+      "injury_summary": "Undisclosed",
+      "est_return": "Ready for Play",
+      "player_injury_score": "0",
+      "reported_date": "2025-01-14",
+      "snapshot_date": "2025-01-14",
+      "created_at": null
+    }
+  ]
+}
+```
+</ResponseExample>
+
+## Response Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `success` | boolean | Request success status |
+| `message` | string | Response message |
+| `data` | array | Array of player objects |
+
+### Player Object Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `player_id` | string | Unique player identifier (same as sportsdata_id) |
+| `player_name` | string | Player's full name |
+| `team` | string | Player's team (may be null) |
+| `position` | string | Player's position (QB, RB, WR, TE, K, etc.) |
+| `sportsdata_id` | string | Sports data API identifier |
+| `injury` | string | Type of injury |
+| `injury_summary` | string | Summary of the injury |
+| `est_return` | string | Estimated return status (e.g., "Ready for Play", "1-2 weeks") |
+| `player_injury_score` | string | Injury severity score (0-157) |
+| `reported_date` | string | Date injury was reported (YYYY-MM-DD) |
+| `snapshot_date` | string | Date of data snapshot (YYYY-MM-DD) |
+| `created_at` | string | Record creation timestamp |
+
+## Injury Score Guide
+
+| Score Range | Severity | Description |
+|-------------|----------|-------------|
+| 0-10 | Low | Minor injuries, likely to play |
+| 11-30 | Moderate | Questionable status |
+| 31-60 | High | Doubtful to play |
+| 61+ | Very High | Out for extended period |
+
+## Use Cases
+
+- **Fantasy Football**: Get injury status for all players
+- **Sports Analysis**: Analyze injury patterns across the league
+- **Data Export**: Bulk export of player injury data
+- **Dashboard**: Populate injury tracking dashboards 

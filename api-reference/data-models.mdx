@@ -1,0 +1,122 @@
+---
+title: 'Data Models'
+description: 'API data models and schemas'
+---
+
+# Data Models
+
+This section describes the data models used throughout the R2P Prediction API.
+
+## Player Object
+
+The complete player object returned by the "Get All Players" endpoint.
+
+```json
+{
+  "player_id": "string",
+  "player_name": "string",
+  "team": "string | null",
+  "position": "string",
+  "sportsdata_id": "string",
+  "injury": "string",
+  "injury_summary": "string",
+  "est_return": "string",
+  "player_injury_score": "string",
+  "reported_date": "string",
+  "snapshot_date": "string",
+  "created_at": "string | null"
+}
+```
+
+## Player Status Object
+
+The simplified player status object returned by status endpoints.
+
+```json
+{
+  "player_name": "string",
+  "status": "string",
+  "reported_date": "string",
+  "injury": "string",
+  "team": "string | null",
+  "position": "string",
+  "injury_score": "string"
+}
+```
+
+## API Response Object
+
+Standard response format for all API endpoints.
+
+```json
+{
+  "success": "boolean",
+  "message": "string",
+  "data": "object | array"
+}
+```
+
+## Error Response Object
+
+Standard error response format.
+
+```json
+{
+  "success": "boolean",
+  "message": "string",
+  "error": "string"
+}
+```
+
+## Field Descriptions
+
+### Player Fields
+
+| Field | Type | Description | Example |
+|-------|------|-------------|---------|
+| `player_id` | string | Unique identifier | "b4af6462-3e3a-49d5-9d96-482ad9f3c0c8" |
+| `player_name` | string | Full player name | "Kadarius Toney" |
+| `team` | string | Team name | "Kansas City Chiefs" |
+| `position` | string | Player position | "WR", "QB", "RB", "TE", "K" |
+| `sportsdata_id` | string | Sports data identifier | "b4af6462-3e3a-49d5-9d96-482ad9f3c0c8" |
+| `injury` | string | Injury type | "Ankle", "Knee", "Concussion" |
+| `injury_summary` | string | Injury summary | "Ankle", "Knee - Sprain" |
+| `est_return` | string | Return timeline | "Ready for Play", "1-2 weeks" |
+| `player_injury_score` | string | Severity score | "4", "0", "157" |
+| `reported_date` | string | Injury report date | "2024-09-10" |
+| `snapshot_date` | string | Data snapshot date | "2024-09-10" |
+| `created_at` | string | Record creation | "2024-08-24T12:29:09.386895+00:00" |
+
+### Status Values
+
+Common `est_return` values:
+
+- **"Ready for Play"** - Player is healthy
+- **"0-1 week"** - Expected return within a week
+- **"1-2 weeks"** - Expected return in 1-2 weeks
+- **"2-3 weeks"** - Expected return in 2-3 weeks
+- **"3-4 weeks"** - Expected return in 3-4 weeks
+- **"4-6 weeks"** - Expected return in 4-6 weeks
+- **"6-8 weeks"** - Expected return in 6-8 weeks
+- **"10-12 weeks"** - Expected return in 10-12 weeks
+- **"Out for this season"** - Season-ending injury
+
+### Position Values
+
+Common `position` values:
+
+- **"QB"** - Quarterback
+- **"RB"** - Running Back
+- **"WR"** - Wide Receiver
+- **"TE"** - Tight End
+- **"K"** - Kicker
+- **"DEF"** - Defense
+
+### Injury Score Ranges
+
+| Score Range | Severity | Description |
+|-------------|----------|-------------|
+| 0-10 | Low | Minor injuries, likely to play |
+| 11-30 | Moderate | Questionable status |
+| 31-60 | High | Doubtful to play |
+| 61+ | Very High | Out for extended period | 

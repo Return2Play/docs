@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "R2P Prediction API",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
@@ -51,18 +51,26 @@
         "tab": "API reference",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Overview",
             "pages": [
-              "api-reference/introduction"
+              "api-reference/r2p-prediction-api",
+              "api-reference/quick-start"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Endpoints",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/endpoints/health",
+              "api-reference/endpoints/get-all-players",
+              "api-reference/endpoints/get-player-status",
+              "api-reference/endpoints/get-all-player-statuses"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "api-reference/data-models",
+              "api-reference/examples"
             ]
           }
         ]

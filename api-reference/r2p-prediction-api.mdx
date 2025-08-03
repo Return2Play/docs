@@ -1,0 +1,53 @@
+---
+title: 'R2P Prediction API'
+description: 'NFL Player Injury Prediction and Status API'
+---
+
+# R2P Prediction API
+
+The R2P (Ready to Play) Prediction API provides real-time NFL player injury status and prediction data. This API connects to a comprehensive database of NFL players and their injury information, helping fantasy football players and sports analysts make informed decisions.
+
+## Base URL
+
+```
+https://ifpwy9pbk0.execute-api.us-east-1.amazonaws.com/prod
+```
+
+## Authentication
+
+Currently, the API does not require authentication for basic endpoints. All requests should include the `Content-Type: application/json` header.
+
+## Rate Limits
+
+- **Requests per minute**: 100
+- **Requests per hour**: 1000
+
+## Response Format
+
+All API responses follow a consistent JSON format:
+
+```json
+{
+  "success": boolean,
+  "message": string,
+  "data": object | array
+}
+```
+
+## Error Responses
+
+When an error occurs, the API returns:
+
+```json
+{
+  "success": false,
+  "message": "Error description",
+  "error": "Detailed error information"
+}
+```
+
+Common HTTP status codes:
+- `200` - Success
+- `400` - Bad Request
+- `404` - Not Found
+- `500` - Internal Server Error 
