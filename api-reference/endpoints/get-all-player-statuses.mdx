@@ -1,75 +1,54 @@
 ---
-title: 'Get All Player Statuses'
-description: 'Retrieve injury status for all players'
+title: 'Get All Player Statuses (Today)'
+description: 'Return today\'s OUT/ACTIVE predictions from DynamoDB'
 ---
 
-# Get All Player Statuses
+# Get All Player Statuses (Today)
 
-Retrieve injury status information for all NFL players in a simplified format focused on status and injury data.
+Returns today\'s predictions from `PLAYER_PREDICTION_FOR_DAY` as simple OUT/ACTIVE statuses (v1) for every player.
 
 <RequestExample>
 ```bash
-curl -X GET https://ifpwy9pbk0.execute-api.us-east-1.amazonaws.com/prod/player
+curl -X GET \
+  -H "Authorization: Bearer <JWT>" \
+  https://ifpwy9pbk0.execute-api.us-east-1.amazonaws.com/prod/player
 ```
 </RequestExample>
 
 <ResponseExample>
 ```json
-{
-  "success": true,
-  "message": "All player statuses retrieved successfully",
-  "data": [
-    {
-      "player_name": "Kadarius Toney",
-      "status": "Ready for Play",
-      "reported_date": "2024-09-10",
-      "injury": "Ankle",
-      "team": null,
-      "position": "WR",
-      "injury_score": "4"
-    },
-    {
-      "player_name": "C.J. Stroud",
-      "status": "Ready for Play",
-      "reported_date": "2025-01-14",
-      "injury": "Undisclosed",
-      "team": null,
-      "position": "QB",
-      "injury_score": "0"
-    }
-  ]
-}
+[
+  {
+    "player_id": "12831",
+    "player_name": "Tyrod Taylor",
+    "status": "OUT",
+    "update_date": "2025-08-13"
+  },
+  {
+    "player_id": "14688",
+    "player_name": "Justin Tucker",
+    "status": "ACTIVE",
+    "update_date": "2025-08-13"
+  }
+]
 ```
 </ResponseExample>
 
 ## Response Fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `success` | boolean | Request success status |
-| `message` | string | Response message |
-| `data` | array | Array of player status objects |
-
-### Player Status Object Fields
+Array of objects with:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `player_name` | string | Player's full name |
-| `status` | string | Current injury status |
-| `reported_date` | string | Date injury was reported (YYYY-MM-DD) |
-| `injury` | string | Type of injury |
-| `team` | string | Player's team (may be null) |
-| `position` | string | Player's position |
-| `injury_score` | string | Injury severity score (0-157) |
+| `player_id` | string | SportsData player ID |
+| `player_name` | string | Player name |
+| `status` | string | V1 status, `OUT` or `ACTIVE` |
+| `update_date` | string | Date (YYYY-MM-DD) the prediction applies to |
 
-## Differences from Get All Players
+## Notes
 
-This endpoint provides a more focused response compared to the "Get All Players" endpoint:
-
-- **Simplified data**: Only essential status information
-- **Consistent format**: All players have the same status object structure
-- **Faster response**: Less data transfer
-- **Status-focused**: Optimized for injury status tracking
+- Requires Authorization header with a valid JWT.
+- Data comes from the daily predictions table `PLAYER_PREDICTION_FOR_DAY` populated by the final report Lambda.
 
 ## Use Cases
 
